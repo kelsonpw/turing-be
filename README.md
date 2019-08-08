@@ -12,6 +12,10 @@ Things you may want to cover:
 * Configuration
 
 * Database creation
+Create your database and run
+```sh
+mysql -u <db_user_name> -D <db_name> -p < db/dump.sql
+```
 
 * Database initialization
 
