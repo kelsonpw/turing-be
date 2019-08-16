@@ -16,7 +16,7 @@ In order to install and run this project locally, you would need to have the fol
 
 - [**Ruby 2.6.1**](https://nodejs.org/en/)
 - [**MySQL**](https://www.mysql.com/downloads/)
-- [**Bundle gem**]([https://](https://bundler.io/))
+- [**Bundle gem**](https://https://bundler.io/)
 
 ### Installation
 
