@@ -13,13 +13,12 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  username: <%= ENV.fetch("DB_USERNAME") { 'root' } %>
-  password: <%= ENV["DB_PASSWORD"] %>
-  socket: /tmp/mysql.sock
+  username: <%= ENV.fetch("MYSQL_USER") { 'turing' } %>
+  password: <%= ENV.fetch("MYSQL_PASSWORD") { 'turing' } %>
 
 development:
   <<: *default
-  database: rails_backend_challenge_template_development
+  database: <%= ENV.fetch("MYSQL_DATABASE") { 'rails_backend_challenge_template_development' } %>
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".

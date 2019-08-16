@@ -1,4 +1,5 @@
  Rails.application.routes.draw do
+  get "/", to: "application#welcome"
   scope 'attributes' do
     get "/", to: "attribute#get_all_attributes"
     get "/:attribute_id", to: "attribute#get_single_attribute"

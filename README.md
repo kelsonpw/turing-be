@@ -1,28 +1,56 @@
-# README
+# Turing Back End Challenge
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+To complete this challenge, you need to ensure all route returns a similar response object as described in our API guide.
+To achieve this goal
 
-Things you may want to cover:
+- You will have to fix the existing bugs
+- Implement the incomplete functions,
+- Add test cases for the main functions of the system.
+- Use Dockerfile to the root of the project to run the app in docker environment
 
-* Ruby version
+## Getting started
 
-* System dependencies
+### Prerequisites
 
-* Configuration
+In order to install and run this project locally, you would need to have the following installed on you local machine.
 
-* Database creation
-Create your database and run
+- [**Ruby 2.6.1**](https://nodejs.org/en/)
+- [**MySQL**](https://www.mysql.com/downloads/)
+- [**Bundle gem**]([https://](https://bundler.io/))
+
+### Installation
+
+- Clone this repository
+
+- Navigate to the project directory
+
+- Run `bundle install` to instal the projects dependencies
+- Provide values for the following environment variables used within the app, using:
+
 ```sh
-mysql -u <db_user_name> -D <db_name> -p < db/dump.sql
+  export MYSQL_USER=<your_database_username>
+  export MYSQL_PASSWORD=<your_database_user_password>
+  export MYSQL_DATABASE=<your_database_name>
 ```
 
-* Database initialization
+- Create a MySQL database and run the `sql` file in the database directory to migrate the database
 
-* How to run the test suite
+```sh
+  mysql -u <db_user_name> -D <db_name> -p < db/dump.sql
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+- Run `rails s` to start the app in development
 
-* Deployment instructions
+## Docker
 
-* ...
+- Build image
+
+`docker build -t rails_application .`
+
+- Run container
+`docker run -it -p 8000:8000 -v $(pwd):/backend rails_application`
+
+## Request and Response Object API guide for all Endpoints
+
+- Check [here](https://docs.google.com/document/d/1J12z1vPo8S5VEmcHGNejjJBOcqmPrr6RSQNdL58qJyE/edit?usp=sharing)
+- Visit `http://127.0.0.1:8000`
