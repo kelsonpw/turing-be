@@ -7,4 +7,4 @@ set -x;
 rm -f /backend/tmp/pids/server.pid
 
 # start rails server
-rails server -p 8000 -b 0.0.0.0
+rails server -p 80 -b 0.0.0.0

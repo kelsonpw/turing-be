@@ -26,7 +26,7 @@ WORKDIR $APP_HOME
 COPY . $APP_HOME
 RUN bundle install
 
-EXPOSE 8000
+EXPOSE 80
 EXPOSE 3306
 
 COPY turing-entrypoint.sh /turing-entrypoint.sh
