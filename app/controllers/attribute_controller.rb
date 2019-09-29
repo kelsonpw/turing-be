@@ -9,22 +9,27 @@
 class AttributeController < ApplicationController
   # get all attributes
   def get_all_attributes
-    json_response({ message: 'NOT IMPLEMENTED' })
+    attributes = Attribute.all
+    json_response(attributes)
   end
 
   # get a single attribute using the attribute_id in the request parameter
   def get_single_attribute
-    json_response({ message: 'NOT IMPLEMENTED' })
+    attribute = Attribute.find(params[:attribute_id])
+    json_response(attribute)
   end
 
   # get all attribute values of a single attribute using the attribute id
   def get_attribute_values
-    json_response({ message: 'NOT IMPLEMENTED' })
+    attribute = Attribute.find(params[:attribute_id])
+    values = attribute.values
+    json_response(values, except: [:attribute_id])
   end
 
   # get all the attributes for a product
   def get_product_attributes
-    json_response({ message: 'NOT IMPLEMENTED' })
+    product = Product.find(params[:product_id])
+    attribute_values = product.product_attributes.map(&:values)
+    json_response(attribute_values)
   end
-
 end

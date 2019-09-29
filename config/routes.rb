@@ -21,10 +21,15 @@ Rails.application.routes.draw do
 
   scope "products" do
     get "/", to: "product#get_all_products"
-    get "/:product_id", to: "product#get_product"
     get "/search", to: "product#search_product"
+    get "/:product_id", to: "product#get_product"
+    get "/:product_id/details", to: "product#get_product"
+    get "/:product_id/locations", to: "product#get_product_locations"
+    get "/:product_id/reviews", to: "product#get_product_reviews"
     get "/inCategory/:category_id", to: "product#get_products_by_category"
     get "/inDepartment/:department_id", to: "product#get_products_by_department"
+
+    post "/:product_id/reviews", to: "product#create_product_review"
   end
 
   scope "departments" do
