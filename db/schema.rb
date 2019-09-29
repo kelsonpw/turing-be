@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2019_09_29_184522) do
 
   create_table "attribute", primary_key: "attribute_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -40,7 +40,7 @@ ActiveRecord::Schema.define(version: 0) do
   create_table "customer", primary_key: "customer_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 50, null: false
     t.string "email", limit: 100, null: false
-    t.string "password", limit: 100, null: false
+    t.string "password_digest", limit: 100, null: false
     t.text "credit_card"
     t.string "address_1", limit: 100
     t.string "address_2", limit: 100
@@ -132,11 +132,11 @@ ActiveRecord::Schema.define(version: 0) do
 
   create_table "shopping_cart", primary_key: "item_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "cart_id", limit: 32, null: false
-    t.integer "product_id", null: false
-    t.string "attributes", limit: 1000, null: false
-    t.integer "quantity", null: false
+    t.integer "product_id"
+    t.string "shopping_cart_attributes"
+    t.integer "quantity", default: 0, null: false
     t.boolean "buy_now", default: true, null: false
-    t.datetime "added_on", null: false
+    t.datetime "added_on", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["cart_id"], name: "idx_shopping_cart_cart_id"
   end
 

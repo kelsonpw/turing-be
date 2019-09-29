@@ -56,7 +56,7 @@ class ProductController < ApplicationController
 
   def get_product_locations
     product = Product.find(params[:product_id])
-    categories = product.categories.map do |category|
+    locations = product.categories.map do |category|
       {
         category_id: category.category_id,
         category_name: category.name,
@@ -65,7 +65,7 @@ class ProductController < ApplicationController
       }
     end
 
-    json_response(categories)
+    json_response(locations)
   end
 
   # get all departments
@@ -121,13 +121,18 @@ class ProductController < ApplicationController
   end
 
   def create_product_review
-    product = Product.find(params[:product_id])
-    customer = Customer.first
-    review, rating = JSON.parse(request.body.read).fetch_values("review", "rating")
+    authenticate_request!
 
-    new_review = Review.new(customer: customer, product: product, review: review, rating: rating)
+    product = Product.find(params[:product_id])
+
+    new_review = Review.new(
+      customer: current_customer,
+      product: product,
+      review: params[:review],
+      rating: params[:rating],
+    )
     new_review.save!
 
-    json_response(new_review)
+    json_response({})
   end
 end

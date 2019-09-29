@@ -3,4 +3,7 @@ class Review < ApplicationRecord
 
   belongs_to :customer
   belongs_to :product
+
+  validates_presence_of :review
+  validates_presence_of :rating
 end
