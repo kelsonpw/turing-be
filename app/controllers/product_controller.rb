@@ -9,53 +9,63 @@
 class ProductController < ApplicationController
   # get all products
   def get_all_products
-    products = Product.all();
+    products = Product.all
     json_response(products)
   end
 
   # get single product details
   def get_product
-    json_response({ message: 'NOT IMPLEMENTED' })
+    json_response({ message: "NOT IMPLEMENTED" })
   end
 
   # search all products
   def search_product
-    json_response({ message: 'NOT IMPLEMENTED' })
+    json_response({ message: "NOT IMPLEMENTED" })
   end
 
   # get all products in a category
   def get_products_by_category
-    json_response({ message: 'NOT IMPLEMENTED' })
+    json_response({ message: "NOT IMPLEMENTED" })
   end
 
   # get all products in a department
   def get_products_by_department
-    json_response({ message: 'NOT IMPLEMENTED' })
+    json_response({ message: "NOT IMPLEMENTED" })
   end
 
   # get all departments
   def get_all_departments
-    departments = Department.all();
+    departments = Department.all
     json_response(departments)
   end
 
   # get single department details
   def get_department
-    json_response({ message: 'NOT IMPLEMENTED' })
+    department = Department.find(params[:department_id])
+    json_response(department)
   end
 
   # get all categories
   def get_all_categories
-    json_response({ message: 'NOT IMPLEMENTED' })
+    categories = Category.all
+    json_response(categories)
   end
 
   # get single category details
   def get_category
-    json_response({ message: 'NOT IMPLEMENTED' })
+    category = Category.find(params[:category_id])
+    json_response(category)
   end
 
   # get all categories in a department
   def get_department_categories
-    json_response({ message: 'NOT IMPLEMENTED' })
+    categories = Category.find_by_department_id(params[:department_id])
+    json_response(categories)
+  end
+
+  def get_product_categories
+    product_category = ProductCategory.find_by_product_id(params[:product_id])
+    category = Category.find(product_category.category_id)
+    json_response(category)
   end
 end
