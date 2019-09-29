@@ -6,6 +6,9 @@ class Product < ApplicationRecord
   has_many :reviews
   has_many :categories, :through => :product_categories
 
+  has_many :shopping_cart_products
+  has_many :shopping_carts, :through => :shopping_cart_products
+
   def self.search(query:, description_length:, page:, limit:)
     conditions = ["name LIKE :query && length(description) < :description_length", {
       query: "%#{query}%",

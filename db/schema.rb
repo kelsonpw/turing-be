@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_184522) do
+ActiveRecord::Schema.define(version: 2019_09_29_222351) do
 
   create_table "attribute", primary_key: "attribute_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -130,6 +130,13 @@ ActiveRecord::Schema.define(version: 2019_09_29_184522) do
     t.string "shipping_region", limit: 100, null: false
   end
 
+  create_table "shopping_card_product", primary_key: ["cart_id", "product_id"], options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "cart_id", null: false
+    t.integer "product_id", null: false
+    t.index ["cart_id"], name: "idx_shopping_cart_product_cart_id"
+    t.index ["product_id"], name: "idx_shopping_cart_product_product_id"
+  end
+
   create_table "shopping_cart", primary_key: "item_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "cart_id", limit: 32, null: false
     t.integer "product_id"
@@ -138,6 +145,24 @@ ActiveRecord::Schema.define(version: 2019_09_29_184522) do
     t.boolean "buy_now", default: true, null: false
     t.datetime "added_on", default: -> { "CURRENT_TIMESTAMP" }, null: false
     t.index ["cart_id"], name: "idx_shopping_cart_cart_id"
+  end
+
+  create_table "shopping_cart_product", primary_key: ["cart_id", "product_id"], options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "cart_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "idx_shopping_cart_product_cart_id"
+    t.index ["product_id"], name: "idx_shopping_cart_product_product_id"
+  end
+
+  create_table "shopping_cart_products", primary_key: ["cart_id", "product_id"], options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "cart_id", null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cart_id"], name: "idx_shopping_cart_product_cart_id"
+    t.index ["product_id"], name: "idx_shopping_cart_product_product_id"
   end
 
   create_table "tax", primary_key: "tax_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
