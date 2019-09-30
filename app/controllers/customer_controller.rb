@@ -11,7 +11,7 @@ class CustomerController < ApplicationController
   def create_customer_profile
     customer = Customer.new(customer_register_params)
 
-    if customer.save && customer.authenticate(customer_register_params[:password])
+    if customer.save! && customer.authenticate(customer_register_params[:password])
       customer_authorized_response(customer)
     else
       json_response({ errors: customer.errors.full_messages }, status: :bad_request)
@@ -40,7 +40,7 @@ class CustomerController < ApplicationController
     authenticate_request!
     current_customer.assign_attributes(customer_update_params)
 
-    if current_customer.save
+    if current_customer.save!
       json_response(current_customer)
     else
       json_response({ errors: customer.errors.full_messages }, status: :bad_request)
@@ -53,7 +53,7 @@ class CustomerController < ApplicationController
     authenticate_request!
     current_customer.assign_attributes(customer_address_params)
 
-    if current_customer.save
+    if current_customer.save!
       json_response(current_customer)
     else
       json_response({ errors: customer.errors.full_messages }, status: :bad_request)
@@ -65,7 +65,7 @@ class CustomerController < ApplicationController
     authenticate_request!
     current_customer.assign_attributes(credit_card: customer_credit_card_param)
 
-    if current_customer.save
+    if current_customer.save!
       json_response(current_customer)
     else
       json_response({ errors: customer.errors.full_messages }, status: :bad_request)

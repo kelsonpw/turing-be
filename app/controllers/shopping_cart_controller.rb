@@ -12,7 +12,7 @@ class ShoppingCartController < ApplicationController
   def generate_unique_cart
     unique_cart = ShoppingCart.generate_with_uuid
 
-    if unique_cart.save
+    if unique_cart.save!
       json_response(:cart_id => unique_cart.cart_id)
     else
       json_response({ message: "Error" })
@@ -21,7 +21,24 @@ class ShoppingCartController < ApplicationController
 
   # add item to existing cart with cart id
   def add_item_to_cart
-    json_response({ message: "NOT IMPLEMENTED" })
+    shopping_cart = ShoppingCart.find(shopping_cart_add_params["cart_id"])
+
+    products = shopping_cart.shopping_cart_products
+    product_addition = products.new(
+      product_id: params[:product_id],
+      product_attributes: params[:product_attributes].split(", "),
+    )
+
+    if product_addition.save
+      cart_items = products.map do |shopping_cart_product|
+        product = shopping_cart_product.product.attributes.except("display", "thumbnail", "image", "image_2")
+        product["item_id"] = shopping_cart_product.item_id
+        product
+      end
+      json_response(cart_items)
+    else
+      json_response({ message: "Error" })
+    end
   end
 
   # get all items in a shopping cart using cart id
@@ -65,5 +82,11 @@ class ShoppingCartController < ApplicationController
   # checkout order and process stripe payment
   def process_stripe_payment
     json_response({ message: "NOT IMPLEMENTED" })
+  end
+
+  private
+
+  def shopping_cart_add_params
+    params.permit(:cart_id, :product_id, :product_attributes)
   end
 end

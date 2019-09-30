@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_29_222351) do
+ActiveRecord::Schema.define(version: 2019_09_29_323452) do
 
   create_table "attribute", primary_key: "attribute_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", limit: 100, null: false
@@ -137,8 +137,7 @@ ActiveRecord::Schema.define(version: 2019_09_29_222351) do
     t.index ["product_id"], name: "idx_shopping_cart_product_product_id"
   end
 
-  create_table "shopping_cart", primary_key: "item_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
-    t.string "cart_id", limit: 32, null: false
+  create_table "shopping_cart", primary_key: "cart_id", id: :string, limit: 32, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "product_id"
     t.string "shopping_cart_attributes"
     t.integer "quantity", default: 0, null: false
@@ -147,9 +146,10 @@ ActiveRecord::Schema.define(version: 2019_09_29_222351) do
     t.index ["cart_id"], name: "idx_shopping_cart_cart_id"
   end
 
-  create_table "shopping_cart_product", primary_key: ["cart_id", "product_id"], options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
+  create_table "shopping_cart_product", primary_key: "item_id", id: :integer, options: "ENGINE=MyISAM DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "cart_id", null: false
     t.integer "product_id", null: false
+    t.string "product_attributes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["cart_id"], name: "idx_shopping_cart_product_cart_id"
