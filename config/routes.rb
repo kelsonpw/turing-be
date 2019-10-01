@@ -64,7 +64,7 @@ Rails.application.routes.draw do
 
   post "/stripe/charge", to: "shopping_cart#process_stripe_payment"
 
-  scope "task" do
+  scope "tax" do
     get "/", to: "tax#get_all_tax"
     get "/:tax_id", to: "tax#get_single_tax"
   end

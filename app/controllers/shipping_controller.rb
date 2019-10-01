@@ -16,13 +16,13 @@ class ShippingController < ApplicationController
 
   # get all shipping type for a shipping region
   def get_shipping_type
-    shipping_region = ShippingRegion.find_by_shipping_region_id(shipping_region_param)
+    shipping_region = ShippingRegion.find_by_shipping_region_id(shipping_region_id)
     json_response(shipping_region)
   end
 
   private
 
-  def shipping_region_param
+  def shipping_region_id
     params.require(:shipping_region_id)
   end
 end
