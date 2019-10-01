@@ -7,14 +7,12 @@ Rails.application.routes.draw do
     get "/inProduct/:product_id", to: "attribute#get_product_attributes"
   end
 
-  scope "customers" do
-    post "/", to: "customer#update_credit_card"
-    post "/login", to: "customer#login"
-  end
-
   scope "customer" do
-    get "/", to: "customer#get_customer_profile"
     put "/", to: "customer#update_customer_profile"
+    get "/", to: "customer#get_customer_profile"
+    post "/", to: "customer#create_customer_profile"
+    post "/login", to: "customer#login"
+    post "/facebook", to: "customer#facebook_login"
     put "/address", to: "customer#update_customer_address"
     put "/creditCard", to: "customer#update_credit_card"
   end
